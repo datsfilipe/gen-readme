@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "readme-generator"
+name = "gen-readme"
 version = "0.1.0"

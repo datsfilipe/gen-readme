@@ -1,5 +1,5 @@
 [package]
-name = "readme-generator"
+name = "gen-readme"
 version = "0.1.0"
 edition = "2021"
 description = "Just a simple readme generator that uses a static template."
