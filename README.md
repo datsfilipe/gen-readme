@@ -4,11 +4,11 @@
 
 A readme generator. Well, trully? it just copies the template to your directory.
 
-[![GitHub stars](https://img.shields.io/github/stars/username/repo-name.svg)](https://github.com/username/repo-name/stargazers)
-![Repository Size](https://img.shields.io/github/repo-size/username/repo-name.svg)
-![Language Count](https://img.shields.io/github/languages/count/username/repo-name.svg)
-![Last Commit](https://img.shields.io/github/last-commit/username/repo-name.svg)
-![Version](https://img.shields.io/badge/version-1.0-blue.svg)
+[![GitHub stars](https://img.shields.io/github/stars/datsfilipe/gen-readme.svg)](https://github.com/datsfilipe/gen-readme/stargazers)
+![Repository Size](https://img.shields.io/github/repo-size/datsfilipe/gen-readme.svg)
+![Language Count](https://img.shields.io/github/languages/count/datsfilipe/gen-readme.svg)
+![Last Commit](https://img.shields.io/github/last-commit/datsfilipe/gen-readme.svg)
+![Version](https://img.shields.io/badge/version-0.1.1-blue.svg)
 
 <br/>
 <br/>
