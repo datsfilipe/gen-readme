@@ -20,3 +20,27 @@ fn selector(options: &Vec<&String>) -> Vec<usize> {
     }
 }
 
+fn get_assets(dir: &str) -> Vec<Asset> {
+    let paths = fs::read_dir(dir).unwrap();
+    let mut assets: Vec<Asset> = Vec::new();
+
+    for path in paths {
+        let path = path.unwrap().path();
+        let path_str = path.to_str().unwrap().to_string();
+        let name = path
+            .file_name()
+            .unwrap()
+            .to_str()
+            .unwrap()
+            .to_string()
+            .replace(".md", "");
+        let asset = Asset {
+            path: path_str,
+            name,
+        };
+        assets.push(asset);
+    }
+
+    return assets;
+}
+
