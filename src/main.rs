@@ -16,6 +16,24 @@ enum Message {
 }
 
 fn main() {
+    let args: Vec<String> = env::args().collect();
+    if !validate_input(&args) {
+        return;
+    }
+
+    if args.len() == 1 {
+        interactive_mode();
+        return;
+    }
+
+    match args[1].as_str() {
+        "--help" => print_help(),
+        "--version" => print_version(),
+        "--skip" => skip_interactive_mode(),
+        _ => panic!("Unknown error"),
+    }
+}
+
 fn interactive_mode() {
     let readme_destination_path = env::current_dir().unwrap().join("README.md");
     let assets_dir = "./src/assets";
@@ -46,6 +64,16 @@ fn print_help() {
     println!("  --help     Print this help message");
     println!("  --version  Print the version number");
     println!("  --skip     Skip the interactive mode");
+}
+
+fn validate_input(args: &Vec<String>) -> bool {
+    let message = verify_args(args);
+    match message {
+        Message::ValidArguments => return true,
+        Message::NoArguments => return true,
+        Message::InvalidArguments => return false,
+        Message::TooManyArguments => return false,
+    }
 }
 
 fn verify_args(args: &Vec<String>) -> Message {
