@@ -7,6 +7,18 @@ struct Asset {
     path: String,
     name: String,
 }
+
+fn main() {
+    let readme_destination_path = env::current_dir().unwrap().join("README.md");
+    let assets_dir = "./src/assets";
+    let mut assets = get_assets(assets_dir);
+    let options = generate_options(&assets);
+    let selected = selector(&options);
+    assets = filter_assets(&assets, &selected);
+
+    generate_readme(&assets, readme_destination_path.to_str().unwrap());
+}
+
 fn generate_readme(assets: &Vec<Asset>, destination: &str) {
     let mut readme = String::new();
     let right_order = [
