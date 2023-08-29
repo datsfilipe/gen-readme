@@ -29,6 +29,14 @@ fn skip_interactive_mode() {
     println!("README.md generated with all sections!");
 }
 
+fn print_help() {
+    println!("Usage: readme-generator [options]");
+    println!("Options:");
+    println!("  --help     Print this help message");
+    println!("  --version  Print the version number");
+    println!("  --skip     Skip the interactive mode");
+}
+
 }
 
 fn generate_readme(assets: &Vec<Asset>, destination: &str) {
