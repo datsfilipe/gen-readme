@@ -8,6 +8,13 @@ struct Asset {
     name: String,
 }
 
+enum Message {
+    ValidArguments,
+    InvalidArguments,
+    TooManyArguments,
+    NoArguments,
+}
+
 fn main() {
 fn interactive_mode() {
     let readme_destination_path = env::current_dir().unwrap().join("README.md");
@@ -41,6 +48,30 @@ fn print_help() {
     println!("  --skip     Skip the interactive mode");
 }
 
+fn verify_args(args: &Vec<String>) -> Message {
+    match args.len() {
+        1 => {
+            println!("Skipping interactive mode, use --help for more information");
+            return Message::NoArguments;
+        }
+        2 => {
+            if args[1] == "--help" {
+                return Message::ValidArguments;
+            }
+            if args[1] == "--version" {
+                return Message::ValidArguments;
+            }
+            if args[1] == "--skip" {
+                return Message::ValidArguments;
+            }
+            println!("Invalid arguments provided, use --help for more information");
+            return Message::InvalidArguments;
+        }
+        _ => {
+            println!("Too many arguments provided, use --help for more information");
+            return Message::TooManyArguments;
+        }
+    }
 }
 
 fn generate_readme(assets: &Vec<Asset>, destination: &str) {
