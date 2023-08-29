@@ -13,7 +13,7 @@ A readme generator. Well, trully? it just copies the template to your directory.
 <br/>
 <br/>
 
-![Meme](./src/assets/meme.jpg)
+![Meme](./assets/meme.jpg)
 
 <br/>
 </div>
