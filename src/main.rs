@@ -44,3 +44,15 @@ fn get_assets(dir: &str) -> Vec<Asset> {
     return assets;
 }
 
+fn generate_options(assets: &Vec<Asset>) -> Vec<&String> {
+    let mut options: Vec<&String> = Vec::new();
+
+    for asset in assets {
+        if asset.name == "_" {
+            continue;
+        };
+        options.push(&asset.name);
+    }
+
+    return options;
+}
