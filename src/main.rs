@@ -7,6 +7,44 @@ struct Asset {
     path: String,
     name: String,
 }
+fn generate_readme(assets: &Vec<Asset>, destination: &str) {
+    let mut readme = String::new();
+    let right_order = [
+        "title",
+        "description",
+        "badges",
+        "cover",
+        "header_end",
+        "requirements",
+        "installation",
+        "configuration",
+        "howtouse",
+        "howtorun",
+        "contributing",
+        "contributors",
+        "credits",
+        "license",
+    ];
+
+    for section in right_order {
+        if section == "header_end" {
+            let header_end = fs::read_to_string("./src/assets/_.md").unwrap();
+            readme.push_str(&header_end);
+            continue;
+        }
+
+        for asset in assets {
+            let content = fs::read_to_string(&asset.path).unwrap();
+            if section != asset.name {
+                continue;
+            }
+            readme.push_str(&content);
+        }
+    }
+
+    fs::write(destination, readme).unwrap();
+}
+
 fn selector(options: &Vec<&String>) -> Vec<usize> {
     let selection = MultiSelect::with_theme(&ColorfulTheme::default())
         .items(options)
