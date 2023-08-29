@@ -9,6 +9,7 @@ struct Asset {
 }
 
 fn main() {
+fn interactive_mode() {
     let readme_destination_path = env::current_dir().unwrap().join("README.md");
     let assets_dir = "./src/assets";
     let mut assets = get_assets(assets_dir);
@@ -17,6 +18,17 @@ fn main() {
     assets = filter_assets(&assets, &selected);
 
     generate_readme(&assets, readme_destination_path.to_str().unwrap());
+    println!("README.md generated with selected sections!");
+}
+
+fn skip_interactive_mode() {
+    let readme_destination_path = env::current_dir().unwrap().join("README.md");
+    let assets_dir = "./src/assets";
+    let assets = get_assets(assets_dir);
+    generate_readme(&assets, readme_destination_path.to_str().unwrap());
+    println!("README.md generated with all sections!");
+}
+
 }
 
 fn generate_readme(assets: &Vec<Asset>, destination: &str) {
