@@ -34,6 +34,9 @@ fn get_assets(dir: &str) -> Vec<Asset> {
             .unwrap()
             .to_string()
             .replace(".md", "");
+        if name == "_" {
+            continue;
+        }
         let asset = Asset {
             path: path_str,
             name,
@@ -48,9 +51,6 @@ fn generate_options(assets: &Vec<Asset>) -> Vec<&String> {
     let mut options: Vec<&String> = Vec::new();
 
     for asset in assets {
-        if asset.name == "_" {
-            continue;
-        };
         options.push(&asset.name);
     }
 
