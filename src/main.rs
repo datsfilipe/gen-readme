@@ -29,6 +29,10 @@ fn skip_interactive_mode() {
     println!("README.md generated with all sections!");
 }
 
+fn print_version() {
+    println!("readme-generator {}", env!("CARGO_PKG_VERSION"));
+}
+
 fn print_help() {
     println!("Usage: readme-generator [options]");
     println!("Options:");
