@@ -2,8 +2,7 @@ use dialoguer::{console::Term, theme::ColorfulTheme, MultiSelect};
 use std::env;
 use std::fs;
 
-fn main() {}
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct Asset {
     path: String,
     name: String,
@@ -45,6 +44,19 @@ fn get_assets(dir: &str) -> Vec<Asset> {
     }
 
     return assets;
+}
+
+fn filter_assets(assets: &Vec<Asset>, selected: &Vec<usize>) -> Vec<Asset> {
+    let mut filtered_assets: Vec<Asset> = Vec::new();
+
+    for i in 0..assets.len() {
+        match selected.iter().find(|x| *x == &i) {
+            Some(index) => filtered_assets.push(assets[*index].clone()),
+            None => continue,
+        };
+    }
+
+    return filtered_assets;
 }
 
 fn generate_options(assets: &Vec<Asset>) -> Vec<&String> {
