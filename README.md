@@ -20,10 +20,24 @@ A readme generator. Well, trully? it just copies the template to your directory.
 
 ## Usage
 
-- Install the package globally:
+Install the package globally:
+
+- With `cargo`:
 
 ```bash
 cargo install gen-readme
+```
+
+- With `AUR helper (yay)`:
+
+```bash
+yay -S gen-readme-bin
+```
+
+- With `AUR helper (paru)`:
+
+```bash
+paru -S gen-readme-bin
 ```
 
 ## How to Run the Project
