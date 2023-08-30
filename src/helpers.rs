@@ -2,38 +2,33 @@ use std::fs;
 
 #[derive(Debug, Clone)]
 pub struct Asset {
-    path: String,
+    content: String,
     name: String,
 }
 
+const ORDER: [&str; 14] = [
+    "title",
+    "description",
+    "badges",
+    "cover",
+    "header_end",
+    "requirements",
+    "installation",
+    "configuration",
+    "howtouse",
+    "howtorun",
+    "contributing",
+    "contributors",
+    "credits",
+    "license",
+];
+
 pub fn generate_readme(assets: &Vec<Asset>, destination: &str) {
     let mut readme = String::new();
-    let right_order = [
-        "title",
-        "description",
-        "badges",
-        "cover",
-        "header_end",
-        "requirements",
-        "installation",
-        "configuration",
-        "howtouse",
-        "howtorun",
-        "contributing",
-        "contributors",
-        "credits",
-        "license",
-    ];
 
-    for section in right_order {
-        if section == "header_end" {
-            let header_end = fs::read_to_string("./src/assets/_.md").unwrap();
-            readme.push_str(&header_end);
-            continue;
-        }
-
+    for section in ORDER {
         for asset in assets {
-            let content = fs::read_to_string(&asset.path).unwrap();
+            let content = &asset.content;
             if section != asset.name {
                 continue;
             }
@@ -44,27 +39,30 @@ pub fn generate_readme(assets: &Vec<Asset>, destination: &str) {
     fs::write(destination, readme).unwrap();
 }
 
-pub fn get_assets(dir: &str) -> Vec<Asset> {
-    let paths = fs::read_dir(dir).unwrap();
+pub fn get_assets() -> Vec<Asset> {
     let mut assets: Vec<Asset> = Vec::new();
+    let mut contents: Vec<String> = Vec::new();
 
-    for path in paths {
-        let path = path.unwrap().path();
-        let path_str = path.to_str().unwrap().to_string();
-        let name = path
-            .file_name()
-            .unwrap()
-            .to_str()
-            .unwrap()
-            .to_string()
-            .replace(".md", "");
-        if name == "_" {
-            continue;
-        }
-        let asset = Asset {
-            path: path_str,
-            name,
-        };
+    // TODO: Find a better way to do this (don't know if it's possible :P)
+    contents.push(include_str!("assets/title.md").to_string());
+    contents.push(include_str!("assets/description.md").to_string());
+    contents.push(include_str!("assets/badges.md").to_string());
+    contents.push(include_str!("assets/cover.md").to_string());
+    contents.push(include_str!("assets/_.md").to_string());
+    contents.push(include_str!("assets/requirements.md").to_string());
+    contents.push(include_str!("assets/installation.md").to_string());
+    contents.push(include_str!("assets/configuration.md").to_string());
+    contents.push(include_str!("assets/howtouse.md").to_string());
+    contents.push(include_str!("assets/howtorun.md").to_string());
+    contents.push(include_str!("assets/contributing.md").to_string());
+    contents.push(include_str!("assets/contributors.md").to_string());
+    contents.push(include_str!("assets/credits.md").to_string());
+    contents.push(include_str!("assets/license.md").to_string());
+
+    for i in 0..contents.len() {
+        let name = ORDER[i].to_string();
+        let content = contents[i].clone();
+        let asset = Asset { name, content };
         assets.push(asset);
     }
 

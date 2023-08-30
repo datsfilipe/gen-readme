@@ -8,8 +8,7 @@ use std::env;
 
 pub fn run() {
     let readme_destination_path = env::current_dir().unwrap().join("README.md");
-    let assets_dir = "./src/assets";
-    let mut assets = helpers::get_assets(assets_dir);
+    let mut assets = helpers::get_assets();
     let options = helpers::generate_options(&assets);
     let selected = selector(&options);
     assets = helpers::filter_assets(&assets, &selected);
