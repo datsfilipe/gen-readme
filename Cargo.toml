@@ -1,9 +1,12 @@
 [package]
 name = "gen-readme"
-version = "1.0.0"
+version = "1.0.1"
 edition = "2021"
 description = "Just a simple readme generator that uses a static templates."
 license = "MIT"
+authors = ["datsfilipe"]
+homepage = "https://crates.io/crates/gen-readme"
+repository = "https://github.com/datsfilipe/gen-readme"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
